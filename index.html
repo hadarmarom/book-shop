@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>Document</title>
+</head>
+
+<body onload="onInit()">
+    <header>
+        <h1 data-trans="title" style="font-family: 'Hanalei', cursive;">Book Details</h1>
+        <h4 data-trans="subtitle">MVC - Model-View-Controller</h4>
+        <select onchange="onSetLang(this.value)">
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+            <option value="es">Spanish</option>
+        </select>
+    </header>
+
+    <select onchange="onSetFilter(this.value)">
+        <option data-trans="filter-all" value="all">filter</option>
+        <option data-trans="price" value="active">Price</option>
+        <option data-trans="id" value="done">Id</option>
+        <option data-trans="rate" value="done">rate</option>
+    </select>
+
+    <form onsubmit="onAddBook(event)">
+        <input data-trans="stat-input-add-book" type="text" placeholder="Add New Book" name="addNewBook" required>
+        <input data-trans="stat-input-add-price" type="number" placeholder="Add Price" name="addNewPrice" required>
+        <button onclick="onRate(this, event)">-</button>
+        <span class="rate" style="width: 45px">0</span>
+        <button onclick="onRate(this, event)">+</button>
+        <button data-trans="add">add</button>
+    </form>
+    <hr width=50%>
+    <button data-trans="prev-page" class="prev-page hidden" onclick="onPrevPage()" >Prev  Page</button>
+    <span class="change-Page" style="width: 45px">1</span>
+    <button data-trans="next-page" class="next-page" onclick="onNextPage()">Next Page</button>
+
+    <section class="books-container"> </section>
+
+    <div class="modal book-Details" hidden>
+        <h5></h5>
+        <div class="modal-photo"></div>
+        <div>
+            <button onclick="onChangeRate(this, event)">-</button>
+            <span class="change-rate" style="width: 45px">0</span>
+            <button onclick="onChangeRate(this, event)">+</button>
+            <button class="submit-rating-btn" data-trans="submit" onclick="onChangeRateSubmit(this.dataset.id)">submit</button>
+        </div>
+        <p></p>
+        <button data-trans="close" onclick="onCloseModal()">Close</button>
+    </div>
+
+    <!-- <img src="img/book.png" alt="books"> -->
+    <script src="js/utile.service.js"></script>
+    <script src="js/i18n-service.js"></script>
+    <script src="js/storage.service.js"></script>
+    <script src="js/book.service.js"></script>
+    <script src="js/book.controller.js"></script>
+
+</body>
+
+</html>
