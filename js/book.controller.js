@@ -7,15 +7,6 @@ function onInit() {
 
 function renderBooks() {
     var books = getBooks()
-    var strHtmlsHeads =
-        `<table>
-                <tr >
-                <th data-trans="id">id</th>
-                <th data-trans="book-name">Name</th>
-                <th data-trans="price">Price</th>
-                <th data-trans="img">ImgUrl</th>
-                <th data-trans="rate">Rate</th>
-                <th data-trans="action" colspan="3">action</th></tr>`
     var strHtmls = books.map(function (book) {
         if (book.name !== gBookNames.find(function (name) { return name === book.name })) {
             book.imgUrl = 'defaultBook';
@@ -38,7 +29,7 @@ function renderBooks() {
                 <button data-trans="stat-button-delete" class="delete-btn" onclick="onDeleteBook('${book.id}')">delete</button></td>
                 </tr>`
     })
-    document.querySelector('.books-container').innerHTML = strHtmlsHeads + strHtmls.join('') + `</table>`;
+    document.querySelector('.tBody').innerHTML = strHtmls.join('');
     doTrans();
 }
 
@@ -86,11 +77,11 @@ function onUpdateBook(bookId) {
 function onReadBook(bookId) {
     console.log('bookId:', bookId)
     var book = getBookById(bookId)
-    var elModal = document.querySelector('.modal')
-    elModal.querySelector('h5').innerText = book.name
-    document.querySelector('.modal-photo ').innerHTML = `<img src="img/${book.imgUrl}.png" alt="img/book.png"></img>`
-    elModal.querySelector('p').innerText = book.desc
-    elModal.querySelector('span').innerText = book.rate
+    var elModal = document.querySelector('.book-details')
+    elModal.querySelector('.book-title').innerText = book.name
+    document.querySelector('.modal-book-photo').innerHTML = `<img src="img/${book.imgUrl}.png" alt="img/book.png"></img>`
+    elModal.querySelector('.long-description-book').innerText = book.desc
+    elModal.querySelector('.change-rate').innerText = book.rate
     onChangeRateSubmit(bookId)
     var ratingBtn=elModal.querySelector('.submit-rating-btn')
     ratingBtn.setAttribute('data-id',bookId)
@@ -103,7 +94,7 @@ function onDeleteBook(bookId) {
 }
 
 function onCloseModal() {
-    document.querySelector('.modal').hidden = true
+    document.querySelector('.book-details').hidden = true
 }
 
 function renderRate(button) {

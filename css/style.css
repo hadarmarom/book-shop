@@ -45,6 +45,8 @@ button:hover {
     height: 100vh;
     min-width: 300px;
     text-align: center;
+    /* in case of using bootstrap  */
+    /* display: block;  */
 }
 
 table, th, td {
